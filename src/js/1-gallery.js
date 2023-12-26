@@ -67,41 +67,10 @@ const images = [
   },
 ];
 
-(function () {
-  const gallery = document.querySelector('.gallery');
+const gallery = document.querySelector('.gallery');
   gallery.innerHTML = createMarkup(images);
 
   const lightbox = new SimpleLightbox('.gallery-item a')
-
-  gallery.addEventListener('click', showLargeImg);
-
-  function addEventListenerToDocument() {
-    document.addEventListener('keydown', closeModal);
-  }
-
-  function removeEventListenerFromDocument() {
-    document.removeEventListener('keydown', closeModal);
-  }
-
-  function closeModal(event) {
-    if (event.key === 'Escape' && lightbox) {
-      removeEventListenerFromDocument();
-      lightbox.close();
-    }
-  }
-
-  function showLargeImg(event) {
-    event.preventDefault();
-
-    const liImg = event.target.closest(".gallery-image");
-
-    if (!liImg) {
-      return;
-    }
-
-    addEventListenerToDocument();
-  }
-
 
   function createMarkup(arr) {
     return arr
@@ -114,5 +83,4 @@ const images = [
         </li>
   `)
       .join("");
-  }
-})();
+  };
