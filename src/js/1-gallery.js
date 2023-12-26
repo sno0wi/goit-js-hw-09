@@ -1,3 +1,6 @@
+import SimpleLightbox from "simplelightbox";
+import "simplelightbox/dist/simple-lightbox.min.css";
+
 const images = [
   {
     preview:
@@ -64,10 +67,11 @@ const images = [
   },
 ];
 
-const gallery = (function () {
-  let instance;
+(function () {
   const gallery = document.querySelector('.gallery');
   gallery.innerHTML = createMarkup(images);
+
+  const lightbox = new SimpleLightbox('.gallery-item a')
 
   gallery.addEventListener('click', showLargeImg);
 
@@ -80,9 +84,9 @@ const gallery = (function () {
   }
 
   function closeModal(event) {
-    if (event.key === 'Escape' && instance) {
+    if (event.key === 'Escape' && lightbox) {
       removeEventListenerFromDocument();
-      instance.close();
+      lightbox.close();
     }
   }
 
@@ -94,17 +98,6 @@ const gallery = (function () {
     if (!liImg) {
       return;
     }
-
-    const original = event.target.dataset.source;
-    const description = event.target.getAttribute("alt");
-
-    instance = basicLightbox.create(`
-    <div class="modal">
-      <img src="${original}" alt="${description}"/>
-    </div>
-  `);
-
-    instance.show();
 
     addEventListenerToDocument();
   }
@@ -123,5 +116,3 @@ const gallery = (function () {
       .join("");
   }
 })();
-
-export default gallery;
