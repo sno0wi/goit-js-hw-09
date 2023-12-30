@@ -68,19 +68,23 @@ const images = [
 ];
 
 const gallery = document.querySelector('.gallery');
-  gallery.innerHTML = createMarkup(images);
+gallery.innerHTML = createMarkup(images);
 
-  const lightbox = new SimpleLightbox('.gallery-item a')
+const lightbox = new SimpleLightbox('.gallery-item a', {
+  captionsData: 'alt',
+  captionDelay: 250,
+});
+  
 
-  function createMarkup(arr) {
-    return arr
-      .map(
-        ({ preview, original, description }) => `
+function createMarkup(arr) {
+  return arr
+    .map(
+      ({ preview, original, description }) => `
         <li class="gallery-item">
-            <a class="gallery-link" href="${original}">
-                <img class="gallery-image" src="${preview}" alt="${description}" />
-            </a>
+          <a class="gallery-link" href="${original}">
+            <img class="gallery-image" src="${preview}" alt="${description}" />
+          </a>
         </li>
-  `)
-      .join("");
-  };
+      `)
+    .join("");
+};

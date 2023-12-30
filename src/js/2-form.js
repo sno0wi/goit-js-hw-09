@@ -1,7 +1,7 @@
 const form = document.querySelector('.feedback-form');
 const localStorageKey = "feedback-form-state";
-const input = form.elements.email;
-const textarea = form.elements.message;
+const emailInput = form.elements.email;
+const messageTextarea = form.elements.message;
 
 form.addEventListener("input", () => {
     const email = document.querySelector('input[name="email"]').value.trim();
@@ -17,8 +17,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const savedData = localStorage.getItem(localStorageKey);
     if (savedData) {
         const parsedData = JSON.parse(savedData);
-        textarea.value = parsedData.email;
-        input.value = parsedData.message;
+        emailInput.value = parsedData.email;
+        messageTextarea.value = parsedData.message;
     }
     })
 
@@ -26,8 +26,8 @@ function formValidation(event) {
     event.preventDefault();
 
     const form = event.target;
-    const email = input.value.trim();
-    const message = textarea.value.trim();
+    const email = emailInput.value.trim();
+    const message = messageTextarea.value.trim();
 
     const data = {
         email: email,
